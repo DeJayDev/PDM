@@ -115,7 +115,9 @@ public class Fights implements Listener {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm");
         String log = "&3" + format.format(now) + " &f-&c " + killer + "&b killed&a " + victim + "&b at the location of&f:&e " + location.getBlockX()
             + ", " + location.getBlockY() + ", " + location.getBlockZ() + "&b after&c " + f.getAttacker() + " &bstarted the fight.";
-        main.logger.getStringList("log").add(log);
+        List<String> list = main.logger.getStringList("log");
+        list.add(log);
+        main.logger.set("log", list);
         main.saveLog();
         Bukkit.getServer().getScheduler().runTaskLaterAsynchronously(main, () -> {
         	main.cmdblock.remove(killer);
