@@ -21,24 +21,13 @@ jobs:
         id: get_sha
         uses: benjlevesque/short-sha@v1.2
 
-      - name: Create a Release
+      - name: GitHub Release
         id: make_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHA: ${{ steps.get_sha.outputs.sha }}
+        uses: softprops/action-gh-release@v1
         with:
+          files: target/privatedeath-2.1.0.jar
           tag_name: ${{ env.SHA }}
-          release_name: Release ${{ env.SHA }}
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+          name: ${{ env.SHA }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SHA: ${{ steps.get_sha.outputs.sha }}
-        with:
-          upload_url: ${{ steps.make_release.outputs.upload_url }}
-          asset_path: ./target/privatedeath-2.1.0.jar
-          asset_name: ${{ github.event.repository.name }}-${{ env.SHA }}.jar
-          asset_content_type: application/jar
