@@ -4,3 +4,6 @@ main: dev.dejay.privatedeath.Main
 api-version: 1.16
 authors: [ A4_Papers, DeJayDev ]
 website: https://github.com/DeJayDev/PDM
+commands:
+  pdm:
+    description: "pdm"
