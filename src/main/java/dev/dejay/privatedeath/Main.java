@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 
     public ArrayList<String> pdmtoggle = new ArrayList<>();
-    public ArrayList<String> cmdblock = new ArrayList<>();
 
     public File killLogging;
     public FileConfiguration logger;
@@ -45,14 +44,11 @@ public class Main extends JavaPlugin implements Listener {
         final FileConfiguration config = this.getConfig();
         config.options().header(
             "PrivateDeathMessage configuration file! \nFor more info go to 'http://dev.bukkit.org/bukkit-plugins/privatedeath/pages/config/'");
-        config.addDefault("CmdBlock.use", true);
-        config.addDefault("CmdBlock.blockTime", 5);
         config.addDefault("Prefix.text", "[PrivateDeath]");
         config.addDefault("Prefix.colour", "&4");
         config.addDefault("Colour.killed", "&a");
         config.addDefault("Colour.killer", "&c");
         config.addDefault("Colour.by", "&b");
-        toggled = config.getBoolean("CmdBlock.use", true);
         config.options().copyDefaults(true);
         saveConfig();
     }

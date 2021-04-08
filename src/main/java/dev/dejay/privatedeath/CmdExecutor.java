@@ -51,29 +51,11 @@ public class CmdExecutor implements Listener, CommandExecutor {
                 if (sender.hasPermission("pdm.config")) {
                     if (args.length == 1 || (args.length == 2)) {
                         sender.sendMessage(ChatColor.BLUE + "Usage: /pdm set " + ChatColor.YELLOW
-                            + "RadiusOn, RadiusArea, CmdBlock, CmdBlockTime, ColourKiller," + " ColourKilled, ColourBy, PrefixColour, PrefixText"
+                            + "RadiusOn, RadiusArea, ColourKiller, ColourKilled, ColourBy, PrefixColour, PrefixText"
                             + ChatColor.GOLD + " (value)");
                         return true;
                     } else {
                         String arg = args[2];
-
-                        if (args[1].equalsIgnoreCase("CmdBlock")) {
-                            if (arg.equals("true")) {
-                                main.getConfig().set("CmdBlock.Use", true);
-                                main.saveConfig();
-                                main.reloadConfig();
-                                main.toggled = main.getConfig().getBoolean("CmdBlock.Use", true);
-                                sender.sendMessage(ChatColor.RED + "CmdBlock " + ChatColor.AQUA + "is now set to " + ChatColor.YELLOW + "true");
-                            } else if (arg.equals("false")) {
-                                main.getConfig().set("CmdBlock.Use", false);
-                                main.saveConfig();
-                                main.reloadConfig();
-                                main.toggled = main.getConfig().getBoolean("CmdBlock.Use", false);
-                                sender.sendMessage(ChatColor.RED + "CmdBlock " + ChatColor.AQUA + "is now set to " + ChatColor.YELLOW + "false");
-                            } else {
-                                sender.sendMessage(ChatColor.RED + "Error input must be \"true\" or \"false\" only!");
-                            }
-                        }
                         if (args[1].equalsIgnoreCase("RadiusOn")) {
                             if (arg.equals("true")) {
                                 main.getConfig().set("radius.on", true);
@@ -90,22 +72,10 @@ public class CmdExecutor implements Listener, CommandExecutor {
                             } else {
                                 sender.sendMessage(ChatColor.RED + "Error input must be \"true\" or \"false\" only!");
                             }
-                        } else if (args[1].equalsIgnoreCase("CmdBlockTime")) {
-                            int num = 0;
-                            try {
-                                num = Integer.parseInt(arg);
-                                main.getConfig().set("CmdBlock.blockTime", num);
-                                sender.sendMessage(ChatColor.RED + "CmdBlockTime " + ChatColor.AQUA + "is now set as " + ChatColor.YELLOW + arg);
-                            } catch (NumberFormatException e) {
-                                sender.sendMessage(ChatColor.RED + "Error: Numbers only!");
-                                main.getConfig().set("CmdBlock.blockTime", 5);
-                            }
-                            main.saveConfig();
-                            main.reloadConfig();
                         } else if (args[1].equalsIgnoreCase("radiusarea")) {
                             int num = 0;
                             try {
-                                num = Integer.valueOf(arg);
+                                num = Integer.parseInt(arg);
                                 main.getConfig().set("radius.radius", num);
                                 sender.sendMessage(ChatColor.RED + "RadiusArea " + ChatColor.AQUA + "is now set as " + ChatColor.YELLOW + arg);
                             } catch (NumberFormatException e) {

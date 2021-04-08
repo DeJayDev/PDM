@@ -83,7 +83,6 @@ public class Fights implements Listener {
         String killedByColour = main.getConfig().getString("Colour.by");
         String KilledColour = main.getConfig().getString("Colour.killed");
         String killerColour = main.getConfig().getString("Colour.killer");
-        int time = main.getConfig().getInt("CmdBlock.blockTime");
 
         Location location = event.getEntity().getKiller().getLocation();
         Fight f = getFight(killer, victim);
@@ -109,7 +108,6 @@ public class Fights implements Listener {
                 }
             }
         }
-        main.cmdblock.add(killer);
         this.fights.remove(f);
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm");
@@ -119,9 +117,6 @@ public class Fights implements Listener {
         list.add(log);
         main.logger.set("log", list);
         main.saveLog();
-        Bukkit.getServer().getScheduler().runTaskLaterAsynchronously(main, () -> {
-        	main.cmdblock.remove(killer);
-		}, (time * 20L));
     }
 
 }
